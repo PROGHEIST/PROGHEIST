@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official Government Portal - Access services, information, and resources for citizens">
+    <title>GovPortal | Your Gateway to Government Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Primary color scheme - trustworthy blues with accessibility focus */
+            --primary-900: #0a2e5a;
+            --primary-800: #1a3a6c;
+            --primary-700: #2a4a7c;
+            --primary-600: #3a5a8c;
+            --primary-500: #4a6a9c;
+            --primary-400: #5a7aad;
+            --primary-300: #7a9ac3;
+            --primary-200: #9abacf;
+            --primary-100: #bbd0e5;
+            --primary-50: #dde5f5;
+            
+            /* Secondary palette */
+            --secondary-500: #e63946; /* Alert/important actions */
+            --secondary-400: #f15e6a;
+            --accent-500: #1d7a3f; /* Success/positive actions */
+            --accent-400: #2d8a4f;
+            
+            /* Neutral palette */
+            --neutral-900: #1a1a1a;
+            --neutral-800: #2d2d2d;
+            --neutral-700: #404040;
+            --neutral-600: #595959;
+            --neutral-500: #737373;
+            --neutral-400: #8c8c8c;
+            --neutral-300: #a6a6a6;
+            --neutral-200: #c0c0c0;
+            --neutral-100: #d9d9d9;
+            --neutral-50: #f2f2f2;
+            
+            /* Semantic colors */
+            --success: #2e7d32;
+            --warning: #ed6c02;
+            --error: #c62828;
+            --info: #0288d1;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
+            --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.92) 0%, rgba(245,247,250,0.95) 100%);
+            
+            /* Spacing system */
+            --space-xxs: 0.25rem;
+            --space-xs: 0.5rem;
+            --space-sm: 0.75rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border radii */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            --shadow-xl: 0 12px 32px rgba(0,0,0,0.18);
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            --font-serif: 'Roboto Slab', Georgia, 'Times New Roman', Times, serif;
+            
+            /* Breakpoints */
+            --bp-mobile: 480px;
+            --bp-tablet: 768px;
+            --bp-desktop: 1024px;
+            --bp-widescreen: 1440px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease-in-out;
+            --transition-normal: 0.3s ease-in-out;
+            --transition-slow: 0.5s ease-in-out;
+        }
+
+        /* Dark mode variables */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-900: #1a3a6c;
+                --primary-800: #2a4a7c;
+                --primary-700: #3a5a8c;
+                --primary-600: #4a6a9c;
+                --primary-500: #5a7aad;
+                --primary-400: #7a9ac3;
+                --primary-300: #9abacf;
+                --primary-200: #bbd0e5;
+                --primary-100: #dde5f5;
+                --primary-50: #eef0f8;
+                
+                --neutral-900: #f8f9fa;
+                --neutral-800: #e9ecef;
+                --neutral-700: #d9d9d9;
+                --neutral-600: #c0c0c0;
+                --neutral-500: #a6a6a6;
+                --neutral-400: #8c8c8c;
+                --neutral-300: #737373;
+                --neutral-200: #595959;
+                --neutral-100: #404040;
+                --neutral-50: #2d2d2d;
+                
+                --gradient-card: linear-gradient(145deg, rgba(35,35,45,0.95) 0%, rgba(30,30,40,0.98) 100%);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 100%;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--neutral-900);
+            background-color: var(--neutral-50);
+            line-height: 1.5;
+            overflow-x: hidden;
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+        }
+
+        /* Dark mode body styling */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--neutral-900);
+                color: var(--neutral-100);
+            }
+        }
+
+        /* Skip navigation link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-700);
+            color: white;
+            padding: 8px 16px;
+            z-index: 1000;
+            transition: top var(--transition-fast);
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Header styles */
+        header {
+            background: var(--gradient-primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) 0;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            min-width: 200px;
+        }
+
+        .logo {
+            height: 48px;
+            width: 48px;
+            background: linear-gradient(135deg, #4a90e2 0%, #2c5282 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .site-title {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 1.75rem;
+            line-height: 1.2;
+        }
+
+        .site-tagline {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: var(--space-xxs);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .language-toggle, .accessibility-toggle {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            padding: var(--space-xxs) var(--space-sm);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+        }
+
+        .language-toggle:hover, .accessibility-toggle:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .search-container {
+            display: flex;
+            flex: 1;
+            max-width: 600px;
+            margin: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+        }
+
+        .search-box {
+            display: flex;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: var(--radius-full) 0 0 var(--radius-full);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: white;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .search-btn {
+            background: var(--accent-500);
+            color: white;
+            border: none;
+            padding: 0 var(--space-lg);
+            border-radius: 0 var(--radius-full) var(--radius-full) 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+        }
+
+        .search-btn:hover {
+            background: var(--accent-400);
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding: var(--space-sm) 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: var(--space-lg);
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.95);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--space-xxs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            font-size: 1.05rem;
+        }
+
+        .nav-links a:hover, .nav-links a:focus {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        .nav-links a.active {
+            background: rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: var(--space-xs);
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(rgba(10, 46, 90, 0.85), rgba(15, 55, 105, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230a2e5a"/><path d="M0,50 L100,50 L100,100 L0,100 Z" fill="%231a3a6c"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: var(--space-3xl) var(--space-md);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+        }
+
+        .hero p {
+            font-size: 1.35rem;
+            margin-bottom: var(--space-xl);
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .top-tasks {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .task-card {
+            background: white;
+            color: var(--primary-900);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            width: 220px;
+            box-shadow: var(--shadow-lg);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .task-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .task-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-sm);
+            color: var(--primary-700);
+        }
+
+        .task-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: var(--space-xxs);
+        }
+
+        .task-desc {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        /* Services section */
+        .section {
+            padding: var(--space-3xl) var(--space-md);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto var(--space-2xl);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--primary-900);
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--neutral-600);
+            line-height: 1.5;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-icon-container {
+            height: 80px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .service-content {
+            padding: var(--space-lg);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-sm);
+            color: var(--primary-900);
+        }
+
+        .service-desc {
+            color: var(--neutral-700);
+            margin-bottom: var(--space-md);
+            line-height: 1.6;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-700);
+            text-decoration: none;
+            font-weight: 500;
+            gap: var(--space-xxs);
+            transition: gap var(--transition-fast);
+        }
+
+        .service-link:hover {
+            gap: var(--space-sm);
+        }
+
+        /* Updates section */
+        .updates-container {
+            background-color: var(--neutral-50);
+            border-top: 1px solid var(--neutral-200);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        .updates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .update-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary-600);
+            transition: transform var(--transition-normal);
+        }
+
+        .update-card:hover {
+            transform: translateX(4px);
+        }
+
+        .update-date {
+            display: inline-block;
+            background: var(--primary-50);
+            color: var(--primary-800);
+            padding: var(--space-xxs) var(--space-sm);
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+            font-size: 0.9rem;
+        }
+
+        .update-title {
+            font-size: 1.35rem;
+            margin-bottom: var(--space-xs);
+            color: var(--primary-900);
+        }
+
+        .update-desc {
+            color: var(--neutral-700);
+            line-height: 1.6;
+        }
+
+        .emergency-banner {
+            background: linear-gradient(135deg, var(--secondary-500) 0%, #c1121f 100%);
+            color: white;
+            text-align: center;
+            padding: var(--space-sm) 0;
+            font-weight: 500;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.9; }
+            100% { opacity: 1; }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--neutral-900);
+            color: var(--neutral-300);
+            padding: var(--space-3xl) var(--space-md) var(--space-xl);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-2xl);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .footer-col h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: var(--space-lg);
+            position: relative;
+            padding-bottom: var(--space-xs);
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-500);
+            border-radius: var(--radius-sm);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .footer-links a {
+            color: var(--neutral-300);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+            display: inline-block;
+            padding: var(--space-xxs) 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-300);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .contact-item {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: var(--space-2xl);
+            margin-top: var(--space-2xl);
+            border-top: 1px solid var(--neutral-800);
+            font-size: 0.95rem;
+            color: var(--neutral-500);
+        }
+
+        /* Utility classes */
+        .btn {
+            display: inline-block;
+            background: var(--primary-700);
+            color: white;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+            border: 2px solid var(--primary-700);
+            cursor: pointer;
+            font-family: var(--font-sans);
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-800);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-700);
+            border-color: var(--primary-700);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-50);
+        }
+
+        .btn-large {
+            padding: var(--space-md) var(--space-2xl);
+            font-size: 1.15rem;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .search-container {
+                order: 3;
+                max-width: 100%;
+                margin: var(--space-sm) 0;
+            }
+            
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .logo-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                margin-top: var(--space-md);
+                padding: var(--space-md) 0;
+                border-top: 1px solid rgba(255,255,255,0.2);
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.15rem;
+            }
+            
+            .top-tasks {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .task-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .section {
+                padding: var(--space-2xl) var(--space-md);
+            }
+            
+            .section-title {
+                font-size: 2.15rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                height: 40px;
+                width: 40px;
+                font-size: 1.25rem;
+            }
+            
+            .site-title {
+                font-size: 1.5rem;
+            }
+            
+            .site-tagline {
+                font-size: 0.85rem;
+            }
+            
+            .hero {
+                padding: var(--space-2xl) var(--space-md);
+            }
+            
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .section-title {
+                font-size: 1.85rem;
+            }
+            
+            .search-input {
+                font-size: 0.95rem;
+            }
+            
+            .search-btn {
+                padding: 0 var(--space-md);
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Accessibility enhancements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Focus visible styles */
+        a:focus-visible, button:focus-visible, input:focus-visible {
+            outline: 3px solid var(--accent-400);
+            outline-offset: 2px;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            header, footer, .top-tasks, .emergency-banner {
+                display: none;
+            }
+            
+            .section {
+                padding: var(--space-lg) 0;
+            }
+            
+            .service-card, .update-card {
+                box-shadow: none;
+                border: 1px solid var(--neutral-300);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <div class="emergency-banner" aria-live="polite">
+        <i class="fas fa-exclamation-triangle"></i> Emergency Alert: Severe weather warning in effect for coastal regions. <a href="#" style="color: white; text-decoration: underline; margin-left: 10px;">View details</a>
+    </div>
+    
+    <header>
+        <div class="header-container">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <div class="logo" aria-label="Government Seal">GOV</div>
+                    <div>
+                        <div class="site-title">United States Government Portal</div>
+                        <div class="site-tagline">Official Services & Information for Citizens</div>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="language-toggle" aria-label="Change language">
+                        <i class="fas fa-language"></i> EN
+                    </button>
+                    <button class="accessibility-toggle" aria-label="Accessibility settings">
+                        <i class="fas fa-universal-access"></i>
+                    </button>
+                    <button class="mobile-menu-btn" aria-expanded="false" aria-controls="main-navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search services, forms, departments..." aria-label="Search government services">
+                    <button class="search-btn" aria-label="Search">
+                        <i class="fas fa-search"></i> <span class="sr-only">Search</span>
+                    </button>
+                </div>
+            </div>
+            
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul class="nav-links" id="main-navigation">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Benefits</a></li>
+                    <li><a href="#">Forms</a></li>
+                    <li><a href="#">Agencies</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Your Gateway to Government Services</h1>
+                <p>Access essential services, benefits, and information from federal, state, and local government agencies in one trusted place.</p>
+                <a href="#" class="btn btn-large">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </a>
+                
+                <div class="top-tasks">
+                    <a href="#" class="task-card" aria-labelledby="task1">
+                        <div class="task-icon" aria-hidden="true">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="task-title" id="task1">Tax Filing</div>
+                        <div class="task-desc">File taxes, check status, get help</div>
+                    </a>
+                    <a href="#" class="task-card" aria-labelledby="task2">
+                        <div class="task-icon" aria-hidden="true">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="task-title" id="task2">Passports</div>
+                        <div class="task-desc">Apply, renew, track status</div>
+                    </a>
+                    <a href="#" class="task-card" aria-labelledby="task3">
+                        <div class="task-icon" aria-hidden="true">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="task-title" id="task3">Benefits</div>
+                        <div class="task-desc">Find programs you qualify for</div>
+                    </a>
+                    <a href="#" class="task-card" aria-labelledby="task4">
+                        <div class="task-icon" aria-hidden="true">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="task-title" id="task4">Vehicle Registration</div>
+                        <div class="task-desc">Register, renew, titles</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Popular Services</h2>
+                <p class="section-subtitle">Access frequently used government services quickly and securely. All services are official and verified.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon-container" aria-hidden="true">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Travel & Immigration</h3>
+                        <p class="service-desc">Apply for passports, visas, green cards, citizenship, and travel advisories.</p>
+                        <a href="#" class="service-link">Access Services <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon-container" aria-hidden="true">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Benefits & Assistance</h3>
+                        <p class="service-desc">Find financial assistance, housing support, food programs, and healthcare benefits.</p>
+                        <a href="#" class="service-link">Check Eligibility <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon-container" aria-hidden="true">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Business & Economy</h3>
+                        <p class="service-desc">Start a business, apply for licenses, access economic data, and find contracting opportunities.</p>
+                        <a href="#" class="service-link">Explore Resources <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon-container" aria-hidden="true">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Education & Training</h3>
+                        <p class="service-desc">Find student aid, training programs, certifications, and educational resources for all ages.</p>
+                        <a href="#" class="service-link">Find Programs <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon-container" aria-hidden="true">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Health & Safety</h3>
+                        <p class="service-desc">Access health services, insurance options, safety guidelines, and emergency preparedness resources.</p>
+                        <a href="#" class="service-link">Get Information <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon-container" aria-hidden="true">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Laws & Regulations</h3>
+                        <p class="service-desc">Understand your rights, legal requirements, regulatory information, and compliance guidelines.</p>
+                        <a href="#" class="service-link">View Resources <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section updates-container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Updates</h2>
+                <p class="section-subtitle">Stay informed about important announcements, policy changes, and upcoming deadlines from government agencies.</p>
+            </div>
+            
+            <div class="updates-grid">
+                <div class="update-card">
+                    <span class="update-date">February 3, 2026</span>
+                    <h3 class="update-title">New Small Business Grant Program</h3>
+                    <p class="update-desc">The Department of Commerce has launched a new grant program to support small businesses affected by recent economic changes. Applications open March 1.</p>
+                </div>
+                
+                <div class="update-card">
+                    <span class="update-date">January 28, 2026</span>
+                    <h3 class="update-title">Tax Season Updates for 2026</h3>
+                    <p class="update-desc">Important changes to tax filing procedures and deadlines for the 2026 tax year. New digital filing options available for all taxpayers.</p>
+                </div>
+                
+                <div class="update-card">
+                    <span class="update-date">January 22, 2026</span>
+                    <h3 class="update-title">Infrastructure Project Updates</h3>
+                    <p class="update-desc">Major transportation infrastructure projects announced for the Midwest region. Public comment period open until February 15.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo-container" style="margin-bottom: var(--space-lg);">
+                    <div class="logo" aria-label="Government Seal">GOV</div>
+                    <div>
+                        <div class="site-title" style="color: white; font-size: 1.5rem;">United States Government Portal</div>
+                    </div>
+                </div>
+                <p style="color: var(--neutral-400); line-height: 1.6; margin-top: var(--space-sm);">
+                    Your official source for government services and information. Secure, verified, and trusted.
+                </p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <span>1600 Pennsylvania Avenue NW, Washington, DC 20500</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <span>1-800-USA-GOV1 (1-800-872-4681)</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>info@usa.gov</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Benefits Finder</a></li>
+                    <li><a href="#">Forms & Applications</a></li>
+                    <li><a href="#">Government Agencies</a></li>
+                    <li><a href="#">State & Local Resources</a></li>
+                    <li><a href="#">Contact Elected Officials</a></li>
+                    <li><a href="#">Public Records Request</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Help & Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">How to Use This Site</a></li>
+                    <li><a href="#">Account Help</a></li>
+                    <li><a href="#">Accessibility Statement</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Security Information</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Stay Connected</h3>
+                <p style="color: var(--neutral-400); margin-top: var(--space-sm); margin-bottom: var(--space-md);">
+                    Get official updates and alerts from government agencies.
+                </p>
+                <div style="display: flex; gap: var(--space-sm);">
+                    <a href="#" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--primary-800); color: white; transition: all var(--transition-fast);">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sr-only">Twitter</span>
+                    </a>
+                    <a href="#" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--primary-800); color: white; transition: all var(--transition-fast);">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <span class="sr-only">Facebook</span>
+                    </a>
+                    <a href="#" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--primary-800); color: white; transition: all var(--transition-fast);">
+                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                        <span class="sr-only">YouTube</span>
+                    </a>
+                    <a href="#" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--primary-800); color: white; transition: all var(--transition-fast);">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                </div>
+                <div style="margin-top: var(--space-md);">
+                    <a href="#" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-bell"></i> Subscribe to Alerts
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2026 United States Government. All rights reserved. This is an official government website.</p>
+            <p style="margin-top: var(--space-xs); font-size: 0.9rem; color: var(--neutral-500);">
+                Verified by the U.S. General Services Administration | <a href="#" style="color: var(--neutral-400);">Website Policies</a> | <a href="#" style="color: var(--neutral-400);">FOIA Requests</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            const languageToggle = document.querySelector('.language-toggle');
+            const accessibilityToggle = document.querySelector('.accessibility-toggle');
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                navLinks.classList.toggle('show');
+                this.innerHTML = navLinks.classList.contains('show') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Language toggle simulation
+            languageToggle.addEventListener('click', function() {
+                const currentLang = this.textContent.includes('EN') ? 'ES' : 'EN';
+                this.innerHTML = `<i class="fas fa-language"></i> ${currentLang}`;
+                alert(`Language changed to ${currentLang === 'EN' ? 'English' : 'Spanish'}. In a real implementation, this would update the entire site content.`);
+            });
+            
+            // Accessibility toggle simulation
+            accessibilityToggle.addEventListener('click', function() {
+                alert('Accessibility settings opened. In a real implementation, this would open a panel with options for font size, contrast, screen reader settings, and keyboard navigation assistance.');
+            });
+            
+            // Search functionality simulation
+            const searchBtn = document.querySelector('.search-btn');
+            const searchInput = document.querySelector('.search-input');
+            
+            searchBtn.addEventListener('click', function() {
+                if (searchInput.value.trim() !== '') {
+                    alert(`Searching for: "${searchInput.value}"\n\nIn a real implementation, this would display search results for government services, forms, and information.`);
+                } else {
+                    alert('Please enter a search term to find government services, forms, or information.');
+                }
+            });
+            
+            // Enter key support for search
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim() !== '') {
+                    alert(`Searching for: "${this.value}"\n\nIn a real implementation, this would display search results for government services, forms, and information.`);
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        if (targetId !== '#') {
+                            const targetElement = document.querySelector(targetId);
+                            if (targetElement) {
+                                window.scrollTo({
+                                    top: targetElement.offsetTop - 100,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
