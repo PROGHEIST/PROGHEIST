@@ -21,17 +21,25 @@ def ask_chatbot(question):
 ## views.py
 
 ```python
-from langchain_openai import ChatOpenAI
-from django.conf import settings
+from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.response import Response
+from .services.llm import ask_chatbot
 
-llm = ChatOpenAI(
-    model = settings.MODEL_NAME,
-    api_key = settings.API_KEY,
-    base_url = settings.BASE_URL,
-    temperature = 0.7
-)
+class ChatbotAPIView(APIView):
+    def post(self, request):
+        question = request.data.get("question")
 
-def ask_chatbot(question):
-    response = llm.invoke(question)
-    return response.content
+        if not question:
+            return Response(
+                {"error": "question is required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        answer = ask_chatbot(question)
+        return Response({
+            "question": question,
+            "answer": answer
+        })
 ```
